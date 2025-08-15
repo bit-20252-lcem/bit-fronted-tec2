@@ -1,0 +1,47 @@
+<section class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+  <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+    <h1 class="text-2xl md:text-3xl font-semibold tracking-tight">Departamentos</h1>
+    <div class="flex items-center gap-2">
+      <input [(ngModel)]="search" placeholder="Buscar…" type="text"
+             class="w-full md:w-80 rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none focus:ring-4 focus:ring-slate-100 focus:border-slate-400" />
+      <a routerLink="/departamentos/nuevo" class="inline-flex items-center justify-center rounded-xl px-4 py-2 bg-slate-900 text-white hover:bg-slate-800">Nuevo</a>
+      <button (click)="load()" class="inline-flex items-center justify-center rounded-xl px-4 py-2 border border-slate-300 hover:bg-slate-50">Recargar</button>
+    </div>
+  </header>
+
+    <div *ngIf="loading" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+    <div class="h-5 w-40 bg-slate-200 rounded mb-3 animate-pulse"></div>
+    <div class="space-y-2 animate-pulse">
+      <div class="h-4 w-full bg-slate-200 rounded"></div>
+      <div class="h-4 w-10/12 bg-slate-200 rounded"></div>
+      <div class="h-4 w-8/12 bg-slate-200 rounded"></div>
+    </div>
+  </div>
+
+    <div *ngIf="!loading" class="overflow-x-auto bg-white rounded-2xl border border-slate-200 shadow-sm flex justify-center">
+    <table class="min-w-full text-sm">
+      <thead class="bg-slate-50 text-slate-700">
+        <tr class="text-left">
+          <th class="py-3 px-4">Código</th>
+          <th class="px-4">Nombre</th>
+          <th class="px-4">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of filtered; trackBy: trackDept" class="border-t hover:bg-slate-50">
+          <td class="py-2 px-4">{{ d.code }}</td>
+          <td class="px-4">{{ d.name }}</td>
+          <td class="px-4">
+            <div class="flex items-center gap-2">
+              <a [routerLink]="['/departamentos', d.code, 'editar']" class="text-slate-700 underline">Editar</a>
+              <button (click)="confirmDelete(d)" class="text-red-600 underline">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="filtered.length === 0">
+          <td colspan="3" class="py-6 text-center text-slate-500">No hay departamentos</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

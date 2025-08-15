@@ -1,0 +1,45 @@
+<nav class="sticky top-0 z-10 bg-white/70 backdrop-blur border-b">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="h-14 flex items-center justify-between">
+      <!-- Brand -->
+      <a routerLink="/reportes/dept-usuarios" class="font-semibold text-lg tracking-tight">App</a>
+
+      <!-- Links desktop -->
+      <div class="hidden md:flex items-center gap-2">
+        <a
+          routerLink="/reportes/dept-usuarios"
+          routerLinkActive="text-slate-900 border-b-2 border-slate-900"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-slate-600 hover:text-slate-900 px-2 py-2"
+        >Dept → Usuarios</a>
+        <a routerLink="/empleados" 
+           routerLinkActive="text-slate-900 border-b-2 border-slate-900"
+           class="text-slate-600 hover:text-slate-900 px-2 py-2"
+           >Empleados</a>
+        <a routerLink="/departamentos" 
+           routerLinkActive="text-slate-900 border-b-2 border-slate-900"
+           class="text-slate-600 hover:text-slate-900 px-2 py-2"
+          >Departamentos</a>
+      </div>
+
+      <!-- Toggle mobile -->
+      <button
+        type="button"
+        class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg border border-slate-300"
+        (click)="toggle()" aria-label="Abrir menú">☰</button>
+    </div>
+  </div>
+
+  <!-- Menu mobile -->
+  <div *ngIf="open" class="md:hidden border-t bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex flex-col">
+      <a
+        routerLink="/reportes/dept-usuarios"
+        routerLinkActive="font-semibold"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="py-2"
+        (click)="toggle()"
+      >Dept → Usuarios</a>
+    </div>
+  </div>
+</nav>

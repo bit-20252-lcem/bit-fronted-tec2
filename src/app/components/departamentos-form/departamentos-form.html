@@ -1,0 +1,30 @@
+<section class="max-w-3xl mx-auto px-4 py-6 space-y-6">
+  <header>
+    <h1 class="text-2xl md:text-3xl font-semibold tracking-tight">{{ isEdit ? 'Editar' : 'Nuevo' }} departamento</h1>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 grid md:grid-cols-2 gap-4">
+    <label class="flex flex-col gap-1 md:col-span-2">
+      <span>Nombre</span>
+      <input type="text" formControlName="name"
+             class="rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none focus:ring-4 focus:ring-slate-100 focus:border-slate-400"
+             [class.border-red-500]="form.controls.name.invalid && form.controls.name.touched" />
+      <small class="text-red-600" *ngIf="form.controls.name.invalid && form.controls.name.touched">Requerido</small>
+    </label>
+
+    <label class="flex flex-col gap-1">
+      <span>Código</span>
+      <input type="number" formControlName="code"
+             class="rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none focus:ring-4 focus:ring-slate-100 focus:border-slate-400"
+             [class.border-red-500]="form.controls.code.invalid && form.controls.code.touched" />
+      <small class="text-red-600" *ngIf="form.controls.code.invalid && form.controls.code.touched">Requerido</small>
+    </label>
+
+    <div class="md:col-span-2 flex gap-2">
+      <button class="inline-flex items-center justify-center rounded-xl px-4 py-2 bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-50" [disabled]="form.invalid || loading">
+        {{ isEdit ? 'Actualizar' : 'Crear' }}
+      </button>
+      <button type="button" (click)="cancel()" class="inline-flex items-center justify-center rounded-xl px-4 py-2 border border-slate-300 hover:bg-slate-50">Cancelar</button>
+    </div>
+  </form>
+</section>
